@@ -42,7 +42,7 @@
         </Button>
     </div>
     <div class="flex gap-2">
-        <Select name="moduleS" class="mt-2" placeholder="Filter by module"/>
+        <Select name="moduleS" items={data.modules} class="mt-2" placeholder="Filter by module"/>
         <Button class="mt-2" on:click={() => (formModal = true)}>Email</Button>
     </div>
     

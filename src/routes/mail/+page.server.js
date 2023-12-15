@@ -1,6 +1,6 @@
 import { supabase } from '$lib/supabaseClient.js';
 import { redirect } from '@sveltejs/kit';
-import { sendMessage } from '$lib/user.js';
+import { sendMessage, studentMessages } from '$lib/user.js';
 //method 
 
 //this is the page a user will see their mail
@@ -13,37 +13,32 @@ async function session(){
     const {data} = await supabase.auth.getSession();
     if(!data.session){
         console.log("User is not logged in. \nTaking them to sign up");
-        throw redirect(303, '/signin');
+       // throw redirect(303, '/signin');
+        return;
     }
-    return data.session.user.id; 
+    return data.session.user; 
     
 }
 
-async function getModules(user_id){
-    const { data, error } = await supabase
-    .from('Modules')
-    .select('module_id, module_code, StudentModules!inner()')
-    .eq('StudentModules.student_id', user_id);
-    const formattedData = data.map(item => ({
-        value: item.module_id,
-        name: item.module_code
-    }));
-    console.log(formattedData);
-    return formattedData;
-}
-export async function load({ params, cookies }) {
-    let user =  await session();
-    const { data, error } = await supabase.rpc('modulemessages', { userid: user});
-    if(error){
-        //check if param has module code
-        console.log("the error"+error); 
-    }
-    console.log(data);
 
+export async function load({ params, cookies }) {
+    //get user
+    let user =  await session();
+    //if user call userData(id, type) and return
+
+    //Later if param load that module data
+
+    //else return to sign in/home
+
+    if(user){
+        if(!user.user_metadata.type){ //student
+            return await studentMessages(user.id);
+        }
+    }
     return{
         //add module code
-        messages: data,
-        modules: await getModules(user)
+        messages: [],
+        modules: []
     }
 }
 

@@ -12,3 +12,6 @@ export function updateModule(){
 export function seeUnrepliedMessages(){
     
 }
+export function deleteModule(){
+    
+}
