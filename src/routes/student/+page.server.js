@@ -35,8 +35,10 @@ export const actions = {
         var subject = formData.get('subject');
         var body = formData.get('body');
         const type = (formData.get('private')=='on') ? true:false;
-
-        await user.sendMessage(module_id, subject, body, type)
+        const User = await user()
+        if(User instanceof Student){
+            await User.sendMessage(module_id, subject, body, type)
+        }
 
         return {
             success: "Sent email"
