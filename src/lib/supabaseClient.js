@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
-import { anon, publicURL } from '$env/static/private';
+import { PUBLIC_ANON, PUBLIC_URL } from '$env/static/public';
 
-export const supabase = createClient(publicURL, anon,{
+export const supabase = createClient(PUBLIC_URL, PUBLIC_ANON,{
     auth: {
       autoRefreshToken: false,
       persistSession: false,

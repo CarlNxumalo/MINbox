@@ -1,6 +1,7 @@
 <script>
     import "../app.pcss";
     import {DarkMode,Badge, Heading,Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+    export let data;
 </script>
 
 <div>
@@ -13,13 +14,21 @@
         </span>
       </NavBrand>
       <NavHamburger />
-      <NavUl style="align-items:center;">
-        <NavLi href="/">Home</NavLi>
-        <NavLi href="/mail">Mail</NavLi>
-        <NavLi href="/modules">Modules</NavLi>
-        <NavLi href="/lecturer/modules">My modules</NavLi>
-        <NavLi href="/profile">Profile</NavLi>
-        <DarkMode></DarkMode>
+      <NavUl>
+        {#if data?.user == 'student'}
+          <NavLi href="/">Home</NavLi>
+          <NavLi href="/student">Mail</NavLi>
+          <NavLi href="/profile">Profile</NavLi>
+        {:else if data?.user == 'lecturer'}
+          <NavLi href="/">Home</NavLi>
+          <NavLi href="/lecturer">Mail</NavLi>
+          <NavLi href="/profile">Profile</NavLi>
+        {:else}
+          <NavLi href="/">Home</NavLi>
+          <NavLi href="/signin">SignIn</NavLi>
+          <NavLi href="/signup">SignUp</NavLi>
+        {/if}
+       <!-- <NavLi><DarkMode></DarkMode></NavLi> -->
       </NavUl>
     </Navbar>
 </div>

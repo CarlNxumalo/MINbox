@@ -3,7 +3,7 @@
     import { Button, Checkbox, Label, Input } from 'flowbite-svelte';
 </script>
     
-<Section name="register">
+<Section  name="crudreadsection">
     <Register href="/signin">
     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <form class="flex flex-col space-y-6" method="POST">

@@ -9,7 +9,7 @@
     function close(){
         formModal = false;
     }
-    
+
 </script>
 
 <Section name="contact">
@@ -32,7 +32,7 @@
                 <Checkbox  class="mt-2"name="private">Private email?</Checkbox>
                 <Button class="mt-2" type="submit">Send email</Button>
             </div>
-        </form>
+    </form>
     </Modal>
 
     <div class="flex gap-2">
@@ -53,7 +53,7 @@
             <h6 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{m.subject}</h6>
             <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">{m.module_code}</p>
         </div>
-        <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Message: {m.body}</p>
+        <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Message: {m.message}</p>
         {#if m.reply}
         <hr style="margin: 0.4rem;">
             <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Reply: {m.reply}</p>
@@ -63,4 +63,5 @@
     {/each}
 
 </Section>
+
 

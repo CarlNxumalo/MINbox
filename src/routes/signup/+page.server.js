@@ -1,15 +1,5 @@
-import { supabase } from '$lib/supabaseClient.js';
-import { signUp } from '$lib/user.js';
-
-export function load({ cookies }) {
-	
-	return {
-		todos: []
-	};
-}
-
 export const actions = {
-	default: async ({ request }) => {
+    default: async ({ request, locals: {supabase} }) =>{
         const formData = await request.formData();
         const name = formData.get('name');
         const surname = formData.get('surname');
@@ -17,9 +7,24 @@ export const actions = {
         const password = formData.get('password');
         const type = (formData.get('type')=='on') ? true:false;
         const student_number = formData.get('student_number');
-        console.log(type);
-        //create user
-        signUp(name, surname, student_number, email, password, type)
-        
-	}
+
+        //input validation here
+
+        const { data, error } = await supabase.auth.signUpWithPassword({
+            email: email,
+            password: password,
+            options:{
+                data: {
+                    name:name,
+                    surname:surname,
+                    uni_number:student_number,
+                    type:type
+                }
+            }
+        });
+
+        return{
+            success: "Signup was succesfull."
+        }
+    }
 };
