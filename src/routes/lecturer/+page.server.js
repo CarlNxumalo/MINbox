@@ -16,4 +16,5 @@ export async function load({ locals:{user}, params, cookies }) {
     if(User instanceof Student){
         throw redirect(303, '/student'); 
     }
+    throw redirect(308, '/signin');
 }
