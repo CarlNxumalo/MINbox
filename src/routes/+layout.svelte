@@ -19,10 +19,8 @@
           <NavLi href="/student">MailBox</NavLi>
           <NavLi href="/student/mymodules">MyModules</NavLi>
           <NavLi href="/student/joinmodules">JoinModules</NavLi>
-          <NavLi href="/profile">Profile</NavLi>
         {:else if data?.user == 'lecturer'}
           <NavLi href="/lecturer">Mail</NavLi>
-          <NavLi href="/profile">Profile</NavLi>
         {:else}
           <NavLi href="/">Home</NavLi>
           <NavLi href="/signin">SignIn</NavLi>
