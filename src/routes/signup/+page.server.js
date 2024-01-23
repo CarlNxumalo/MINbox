@@ -7,7 +7,7 @@ export const actions = {
         const surname = formData.get('surname');
         const email = formData.get('email');
         const password = formData.get('password');
-        const type = (formData.get('type')=='on') ? true:false;
+        const type = (formData.get('type')=='on') ? 'lecturer':'student';
         const student_number = formData.get('student_number');
 
         //input validation here
