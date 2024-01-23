@@ -35,7 +35,7 @@ export async function handle({ event, resolve }) {
   event.locals.user = async () =>{
     const session = await event.locals.getSession()
     if(!session.user){
-      throw redirect(308, '/signin')
+      return null
     }
     if(session.user.user_metadata.type == 'student'){
       return Student.userObject(session)

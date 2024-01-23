@@ -4,11 +4,17 @@ import { Lecturer } from '../../../lib/lecturer.js'
 
 export async function load({ locals:{user}, params, cookies }) {
     //show joinned modules
-    const User = await user()
-    if(User instanceof Student){
-        //console.log(await User.myModules())
+    try {
+        const User = await user()
+        if(User instanceof Student){
+            //console.log(await User.myModules())
+            return{
+                modules: await User.myModules()
+            }
+        }
+    } catch (error) {
         return{
-            modules: await User.myModules()
+            modules: []
         }
     }
     if(User instanceof Lecturer){

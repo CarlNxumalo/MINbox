@@ -30,6 +30,7 @@ export class Student {
 
     async myModules(){
         //return the modules they have joined 
+       try {
         const query = {
             text: `
             select
@@ -45,6 +46,9 @@ export class Student {
         }
         let records = await crud(query)
         return records.rows
+       } catch (error) {
+            throw error;
+       }
 
     }
 

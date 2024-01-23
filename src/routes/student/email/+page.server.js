@@ -5,11 +5,16 @@ import { Lecturer } from '../../../lib/lecturer.js';
 export async function load({ locals:{user}, params, cookies }) {
     const User = await user()
     //console.log(User)
-    if(User instanceof Student)
-    {
+    try {
+        if(User instanceof Student)
+        {
+            return {
+                modules: await User.myModules()
+            }
+        }
+    } catch (error) {
         return {
-            modules: await User.myModules(),
-            messages: await User.showMessages()
+            modules: []
         }
     }
 
