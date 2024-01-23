@@ -1,4 +1,4 @@
-import { Lecturer } from '../../lib/lecturer.js'
+import { Lecturer } from '../../lib/Lecturer.js'
 import { Student } from '../../lib/Student.js';
 import { redirect } from '@sveltejs/kit';
 /*

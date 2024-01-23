@@ -1,7 +1,7 @@
 import { PUBLIC_ANON, PUBLIC_URL } from '$env/static/public';
 import { createServerClient } from '@supabase/ssr'
 import { Student } from './lib/Student';
-import { Lecturer } from './lib/lecturer';
+import { Lecturer } from './lib/Lecturer';
 import { redirect } from '@sveltejs/kit';
 export async function handle({ event, resolve }) {
 

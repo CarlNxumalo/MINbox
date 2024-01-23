@@ -30,7 +30,6 @@ export class Student {
 
     async myModules(){
         //return the modules they have joined 
-       try {
         const query = {
             text: `
             select
@@ -45,52 +44,41 @@ export class Student {
             values: [this.id]
         }
         let records = await crud(query)
-        return records.rows
-       } catch (error) {
-            throw error;
-       }
+        return records.rows;
 
     }
 
     async joinModule(module_id){
-        try {
-            if(!Number.isInteger(module_id)){
-                throw new Error('Module ID must be an integer');
-            }
-            const query = {
-                text: `
-                insert into
-                    "StudentModules" (student_id, module_id)
-                values
-                    ($1, $2);
-                `,
-                values: [this.id, module_id]
-            }
-            const result = await crud(query)
-        } catch (error) {
-            throw error
+        if(!Number.isInteger(module_id)){
+            throw new Error('Module ID must be an integer');
         }
+        const query = {
+            text: `
+            insert into
+                "StudentModules" (student_id, module_id)
+            values
+                ($1, $2);
+            `,
+            values: [this.id, module_id]
+        }
+        const result = await crud(query)
     }
 
     async leaveModule(module_id){
         //make sure id is int.and if param is there/undifiend
-        try {
-            if(!Number.isInteger(module_id)){
-                throw new Error("Module ID must be an integer");
-            }
-            const query = {
-                text: `
-                    delete from public."StudentModules"
-                    where
-                    student_id = $1
-                    and module_id = $2;
-                `,
-                values: [this.id, module_id]
-            }
-            const result = await crud(query)       
-        } catch (error) {
-            throw error;
+        if(!Number.isInteger(module_id)){
+            throw new Error("Module ID must be an integer");
         }
+        const query = {
+            text: `
+                delete from public."StudentModules"
+                where
+                student_id = $1
+                and module_id = $2;
+            `,
+            values: [this.id, module_id]
+        }
+        const result = await crud(query) 
     }
 
     async modulesNotJoined(){
@@ -111,7 +99,7 @@ export class Student {
     }
 
     async sendMessage(module_id, subject, message, Private){
-        try {
+        
             if(!Number.isInteger(module_id)){
                 throw new Error("Module ID must be an integer");
             }
@@ -142,9 +130,7 @@ export class Student {
             }
             const result = await crud(query)
             console.log("sent message")  
-        } catch (error) {
-            throw error;
-        }
+        
 
         /*
         const mailOptions = {
