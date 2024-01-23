@@ -30,7 +30,6 @@ export const actions = {
                 const formData = await request.formData();
                 const reply = formData.get('reply');
                 await User.reply(params.message, reply);
-                throw redirect(303, '/lecturer');
             }
         }
         catch(error){
@@ -38,6 +37,7 @@ export const actions = {
                 feedback:'Reply sent unsuccesfully. '+error.message
             }
         }        
+        throw redirect(303, '/lecturer');
 	}
 };
 
