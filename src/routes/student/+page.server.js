@@ -29,7 +29,7 @@ export async function load({ locals:{user}, params, cookies }) {
     if(User instanceof Lecturer){
         throw redirect(303, '/lecturer'); 
     }
-    
+    throw redirect(303, '/signin'); 
 
 }
 

@@ -1,5 +1,7 @@
+import { redirect } from '@sveltejs/kit';
+
 export const actions = {
-    default: async ({ request, locals: {supabase} }) =>{
+    default: async ({ request, locals }) =>{
         const formData = await request.formData();
         const name = formData.get('name');
         const surname = formData.get('surname');
@@ -10,7 +12,7 @@ export const actions = {
 
         //input validation here
 
-        const { data, error } = await supabase.auth.signUpWithPassword({
+        const { data, error } = await  locals.supabase.auth.signUp({
             email: email,
             password: password,
             options:{
@@ -23,8 +25,14 @@ export const actions = {
             }
         });
 
-        return{
-            success: "Signup was succesfull."
+        if(!error){
+            throw redirect(303, "/signin")
         }
+
+        return{
+            message: "Signup was unsuccesfull. "+error.message
+        }
+        
+        
     }
 };

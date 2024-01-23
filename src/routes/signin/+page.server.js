@@ -1,4 +1,6 @@
 import { redirect } from '@sveltejs/kit';
+import { Student } from '../../lib/Student.js';
+import { Lecturer } from '../../lib/lecturer.js';
 export async function load({ locals, params, cookies }) {
     /*
     const email = 'carl.bongani@gmail.com';
@@ -26,9 +28,18 @@ export const actions = {
             email: email,
             password: password,
         });
-        
-        if(!error){
-            throw redirect(303, '/student');
+
+        if(error){
+            return{
+                message: "Sign in was unsuccesfull.\n"+error.message
+            }
+        }
+        const User = await locals.user()
+        if(User instanceof Student){
+            throw redirect(303, "/student")
+        }
+        if(User instanceof Lecturer){
+            throw redirect(303, "/lecturer")
         }
 	}
 };

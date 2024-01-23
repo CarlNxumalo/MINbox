@@ -1,8 +1,20 @@
 <script>
     import { Section, Register } from 'flowbite-svelte-blocks';
-    import { Button, Checkbox, Label, Input, Heading } from 'flowbite-svelte';
+    import { Button, Checkbox, Label, Input, Heading, Modal, P } from 'flowbite-svelte';
+    export let form;
+    let popupModal = false;
+    if(form?.message != undefined){
+        popupModal = true;
+    }
 </script>
-    
+<Modal title='Sign up message' bind:open={popupModal} size="xs" autoclose>
+    <div class="text-center">
+     <!--<ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" /> --> 
+      <P whitespace="preline" class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{form?.message}</P>
+      <!--Has a success button to redirect to MailBox-->
+      <Button color="alternative" on:click={() => (popupModal = false)}>Ok</Button>
+    </div>
+</Modal>
 <Section  name="crudreadsection">
     <Register>
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
