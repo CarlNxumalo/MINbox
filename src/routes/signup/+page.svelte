@@ -1,7 +1,6 @@
 <script>
     import { Section, Register } from 'flowbite-svelte-blocks';
     import { Button, Checkbox, Label, Input, Heading } from 'flowbite-svelte';
-    import { DarkMode } from 'flowbite-svelte';
 </script>
     
 <Section  name="crudreadsection">

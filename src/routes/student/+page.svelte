@@ -4,37 +4,9 @@
     import { SearchOutline } from 'flowbite-svelte-icons';
     import { enhance } from '$app/forms';
     export let data;
-    let formModal = false;
-
-    function close(){
-        formModal = false;
-    }
-
 </script>
 
 <Section name="contact">
-    <Modal bind:open={formModal}  autoclose={false} >
-    <form class="space-y-8" method="POST" use:enhance on:submit={close}>
-        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Email Lecturer</h3>
-            <div>
-                <Label class="space-y-2">
-                    <span>Select a module</span>
-                    <Select items={data.modules} name="module" class="mt-2" required/>
-                </Label>
-            </div> 
-            <div>
-                <Input id="subject" name="subject" placeholder="Subject" required />
-            </div>
-            <div>
-                <Textarea  class="mt-2"id="body" name="body" rows="5" placeholder="Compose message" label="Your message" required />
-            </div>
-            <div  style="display: flex; justify-content: space-between;">
-                <Checkbox  class="mt-2"name="private">Private email?</Checkbox>
-                <Button class="mt-2" type="submit">Send email</Button>
-            </div>
-    </form>
-    </Modal>
-
     <div class="flex gap-2">
         <Search size="md" />
         <Button class="!p-2.5">
@@ -43,7 +15,7 @@
     </div>
     <div class="flex gap-2">
         <Select name="moduleS" items={data.modules} class="mt-2" placeholder="Filter by module"/>
-        <Button class="mt-2" on:click={() => (formModal = true)}>Email</Button>
+        <Button class="mt-2" href="/student/email" outline>Email</Button>
     </div>
     
     {#each data.messages as m}
@@ -61,7 +33,6 @@
     </Card>
     </div>
     {/each}
-
 </Section>
 
 

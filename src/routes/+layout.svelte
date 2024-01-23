@@ -16,11 +16,11 @@
       <NavHamburger />
       <NavUl>
         {#if data?.user == 'student'}
-          <NavLi href="/">Home</NavLi>
-          <NavLi href="/student">Mail</NavLi>
+          <NavLi href="/student">MailBox</NavLi>
+          <NavLi href="/student/mymodules">MyModules</NavLi>
+          <NavLi href="/student/joinmodules">JoinModules</NavLi>
           <NavLi href="/profile">Profile</NavLi>
         {:else if data?.user == 'lecturer'}
-          <NavLi href="/">Home</NavLi>
           <NavLi href="/lecturer">Mail</NavLi>
           <NavLi href="/profile">Profile</NavLi>
         {:else}

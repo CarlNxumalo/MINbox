@@ -2,6 +2,7 @@ import { PUBLIC_ANON, PUBLIC_URL } from '$env/static/public';
 import { createServerClient } from '@supabase/ssr'
 import { Student } from './lib/Student';
 import { Lecturer } from './lib/lecturer';
+import { redirect } from '@sveltejs/kit';
 export async function handle({ event, resolve }) {
 
   console.log("hooks running2...");
@@ -34,7 +35,7 @@ export async function handle({ event, resolve }) {
   event.locals.user = async () =>{
     const session = await event.locals.getSession()
     if(!session.user){
-      return null
+      throw redirect(308, '/signin')
     }
     if(session.user.user_metadata.type == 'student'){
       return Student.userObject(session)

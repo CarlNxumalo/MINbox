@@ -13,10 +13,7 @@ export async function load({ locals:{user}, params, cookies }) {
             messages: await User.seeMessages()
         }
     }
-
     if(User instanceof Student){
         throw redirect(303, '/student'); 
     }
-
-    throw redirect(303, '/signin'); 
 }

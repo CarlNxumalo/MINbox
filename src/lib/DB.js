@@ -14,7 +14,7 @@ export async function crud(query){
       return result;
   } catch (error) {
       console.log("Crud()"+error.message)
-      throw new Error("Error with database query.")
+      throw new Error("Error with database query.\n"+error.message)
   } finally{
       client.release()
   }
