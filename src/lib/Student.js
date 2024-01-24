@@ -90,9 +90,10 @@ export class Student {
             FROM
                 "Modules" m
             LEFT JOIN
-                "StudentModules" sm ON m.id = sm.module_id AND sm.student_id = '206017e9-48a5-4da1-b67d-b2536fb7e126'
+                "StudentModules" sm ON m.id = sm.module_id AND sm.student_id = $1
             where  sm.module_id IS NULL;
-            `
+            `,
+            values: [this.id]
         }
         const res = await crud(query)
         return res.rows
