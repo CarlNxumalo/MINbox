@@ -1,6 +1,7 @@
-import { Lecturer } from '../../lib/Lecturer.js'
+
 import { Student } from '../../lib/Student.js';
 import { redirect } from '@sveltejs/kit';
+import { Lecturer } from '../../lib/lecturer.js';
 /*
 Show the lecturer all their messages
 cmb to filter by module

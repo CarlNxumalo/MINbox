@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit'
 import { Student } from '../../../lib/Student.js'
-import { Lecturer } from '../../../lib/Lecturer.js'
+import { Lecturer } from '../../../lib/lecturer.js'
 
 export async function load({ locals:{user}, params, cookies }) {
     //show joinned modules
