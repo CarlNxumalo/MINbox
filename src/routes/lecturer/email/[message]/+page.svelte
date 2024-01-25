@@ -1,14 +1,26 @@
 <script>
     import { Section } from "flowbite-svelte-blocks";
-    import { Label, Input, Button, Select, Textarea, P, Heading, Hr } from "flowbite-svelte";
+    import { Label, Input, Button, Select, Textarea, P, Heading, Hr, Modal } from "flowbite-svelte";
     import { enhance } from '$app/forms'; 
     export let data;
     export let form;
+    let popupModal = false;
+    if(form?.feedback != undefined){
+        popupModal = true;
+    }
 </script>
-    
+<Modal title='Email Status' bind:open={popupModal} size="xs" autoclose>
+<div class="text-center">
+ <!--<ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" /> --> 
+  <P whitespace="preline" class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{form.feedback}</P>
+  <!--Has a success button to redirect to MailBox-->
+  <Button color="alternative" on:click={() => (popupModal = false)}>Ok</Button>
+</div>
+</Modal>
+
 <Section name="contact">
   <div >
-    <Heading tag="h2">Student Mail</Heading>
+    <Heading tag="h3">Student Mail</Heading>
   </div>
   <div class="grid gap-4 sm:grid-cols-2 sm:gap-2" style="padding-top: 1rem; padding-bottom: 2rem;">
       <Label for="name" >Name: {data.message?.student.name}</Label>
@@ -25,15 +37,25 @@
       </P>
     </div>
   </div>
-  <form method="POST" action="?/reply" style="padding-top: 1rem; padding-bottom: 1rem;">
-    <div class="grid gap-4 sm:grid-cols- sm:gap-4">
-        <div class="sm:col-span-2">
-        <Textarea id="reply" placeholder="Your response to this message" rows="8" name="reply" required />
-        </div>
-        <Button type="submit" class="w-32">Send reply</Button>
+  {#if data.message?.reply == null}
+    <form method="POST" action="?/reply" style="padding-top: 1rem; padding-bottom: 4rem;">
+      <div class="grid gap-4 sm:grid-cols- sm:gap-4">
+          <div class="sm:col-span-2">
+          <Textarea id="reply" placeholder="Your response to this message" rows="8" name="reply" required />
+          </div>
+          <Button type="submit" class="w-32">Send reply</Button>
+      </div>
+    </form>
+  {:else}
+    <Hr></Hr>
+    <div style="padding-bottom: 4rem;">
+      <Heading tag="h3" style="padding-bottom: 1rem; " >Lecturer reply</Heading>
+      <P  whitespace="preline" >
+        {data.message?.reply}
+      </P>
     </div>
-    {#if form?.feedback!=null}
-          <Label for="feedback" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">{form.feedback}</Label>
-    {/if}
-  </form>
+    
+  {/if}
+  
+
 </Section>

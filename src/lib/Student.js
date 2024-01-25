@@ -169,6 +169,28 @@ export class Student {
         const result  = await crud(query)
         return result.rows
     }
+    async showMessage(message_id){
+        if(!Number.isInteger(message_id)){
+            throw new Error("Message ID must be an integer");
+        }
+        const query = {
+            text: `
+            select
+                m.id, m.module_id, m.subject, m.message, m.reply, m.private, u.raw_user_meta_data as student,
+                mods.module_code, m.student_id
+            from "Messages" m
+                inner join "StudentModules" sm on m.module_id = sm.module_id
+                inner join "Modules" mods on mods.id = m.module_id
+                inner join auth.users u on m.student_id = u.id
+            where 
+                sm.student_id = $1
+                and m.id = $2;
+            `,
+            values: [this.id, message_id]
+        }
+        const result  = await crud(query)
+        return result.rows[0]
+    }
     
 }
 

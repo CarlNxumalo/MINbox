@@ -100,8 +100,8 @@ export class Lecturer {
                 from "Messages" m
             inner join "Modules" mod on m.module_id = mod.id
                 where mod.lecturer_id = $1
-                and m.reply isnull;
             `,
+            //and m.reply isnull;
             values: [this.id]
         }
         let result = await crud(query)
@@ -115,9 +115,9 @@ export class Lecturer {
             inner join "Modules" mod on m.module_id = mod.id
             inner join auth.users u on m.student_id = u.id
                 where mod.lecturer_id = $1
-                and m.reply isnull
                 and m.id = $2;
             `,
+            //and m.reply isnull
             values: [this.id, message_id]
         }
         let result = await crud(query)
