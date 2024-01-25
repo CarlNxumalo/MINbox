@@ -18,7 +18,6 @@ export class Lecturer {
         const email = session.user.email
         return new Lecturer(id, name, surname, email, uni_number);
     }
-
     static createObject(result) {
         const name = result.rows[0].raw_user_meta_data.name
         const surname = result.rows[0].raw_user_meta_data.surname
@@ -27,7 +26,6 @@ export class Lecturer {
         const email = result.rows[0].email
         return new Lecturer(id, name, surname, email, uni_number);
     }
-
     async myModules(){
         //return the modules they have joined 
         const query = {
@@ -41,7 +39,6 @@ export class Lecturer {
         let result = await crud(query)
         return result.rows
     }
-
     async addModule(module_code){
         const query = {
             text: `
@@ -78,7 +75,6 @@ export class Lecturer {
         }
         await crud(query);
     }
-
     async reply(message_id, reply){
         const query = {
             text: `
@@ -92,7 +88,6 @@ export class Lecturer {
         }
         await crud(query);
     }
-
     async seeMessages(){
         const query = {
             text: `

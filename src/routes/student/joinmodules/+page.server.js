@@ -6,7 +6,6 @@ export async function load({ locals:{user}, params, cookies }) {
     //show joinned modules
     const User = await user()
     if(User instanceof Student){
-        console.log(await User.modulesNotJoined())
         return{
             modules: await User.modulesNotJoined()
         }
