@@ -157,7 +157,7 @@ export class Student {
             text: `
             select
                 m.id, m.module_id, m.subject, m.message, m.reply, m.private, 
-                mods.module_code, m.student_id
+                mods.module_code
             from "Messages" m
                 inner join "StudentModules" sm on m.module_id = sm.module_id
                 inner join "Modules" mods on mods.id = m.module_id
@@ -165,6 +165,27 @@ export class Student {
                 sm.student_id = $1;
             `,
             values: [this.id]
+        }
+        const result  = await crud(query)
+        return result.rows
+    }
+    async showMessagesByModule(module_id){
+        if(!Number.isInteger(module_id)){
+            throw new Error("Module ID must be an integer");
+        }
+        const query = {
+            text: `
+            select
+                m.id, m.module_id, m.subject, m.message, m.reply, m.private, 
+                mods.module_code
+            from "Messages" m
+                inner join "StudentModules" sm on m.module_id = sm.module_id
+                inner join "Modules" mods on mods.id = m.module_id
+            where 
+                sm.student_id = $1
+                AND m.module_id = $2;
+            `,
+            values: [this.id, module_id]
         }
         const result  = await crud(query)
         return result.rows
@@ -177,7 +198,7 @@ export class Student {
             text: `
             select
                 m.id, m.module_id, m.subject, m.message, m.reply, m.private, u.raw_user_meta_data as student,
-                mods.module_code, m.student_id
+                mods.module_code
             from "Messages" m
                 inner join "StudentModules" sm on m.module_id = sm.module_id
                 inner join "Modules" mods on mods.id = m.module_id
